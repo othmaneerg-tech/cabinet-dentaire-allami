@@ -667,7 +667,7 @@ body.dark-theme .indicator-check {
 }
 /* Définition des images pour chaque type de carte */
 .service-image-oral { --service-image: url("../images/services/service-oral.png"); }
-.service-image-orthodontics { --service-image: url("../images/services/service-orthodontics.png"); }
+.service-image-orthodontics { --service-image: url("../images/services/orthodontiques.webp"); }
 .service-image-smile { --service-image: url("../images/services/service-smile.png"); }
 .service-image-filler { --service-image: url("../images/services/service-filler.png"); }
 .service-image-laser { --service-image: url("../images/services/Laser2.webp"); }
