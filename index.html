@@ -18,8 +18,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     
-    <!-- Google Model Viewer for 3D elements -->
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+    <!-- Google Model Viewer for 3D elements (deferred) -->
+    <script>
+      // Lazy-load the model-viewer library only when needed
+      var modelViewerLoaded = false;
+      function loadModelViewerLib() {
+        if (modelViewerLoaded) return;
+        modelViewerLoaded = true;
+        var s = document.createElement('script');
+        s.type = 'module';
+        s.src = 'https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js';
+        document.head.appendChild(s);
+      }
+    </script>
 
     <!-- 🛡️ Shield.js — Protection anti-inspection -->
     <script src="/shield.js"></script>
@@ -393,7 +404,7 @@
               <!-- 3D Model Column -->
               <div class="showcase3d-banner scale-in">
                 <model-viewer
-                  src="./assets/models/dental_chair.glb"
+                  data-src="./assets/models/dental_chair.glb"
                   alt="Chaise Dentaire 3D Interactive"
                   auto-rotate
                   camera-controls
@@ -402,7 +413,7 @@
                   shadow-intensity="1"
                   auto-rotate-delay="0"
                   rotation-per-second="15deg"
-                  loading="eager"
+                  loading="lazy"
                   style="width: 100%; height: 450px; background-color: transparent;"
                 >
                   <!-- Loading placeholder -->
@@ -554,7 +565,7 @@
               <div class="showcase3d-banner scale-in" style="position: relative;">
                 <model-viewer
                   id="imac-viewer"
-                  src="./assets/models/imac.glb"
+                  data-src="./assets/models/imac.glb"
                   alt="iMac 3D Interactif avec plan de traitement"
                   auto-rotate
                   camera-controls
@@ -563,7 +574,7 @@
                   shadow-intensity="1"
                   auto-rotate-delay="0"
                   rotation-per-second="4deg"
-                  loading="eager"
+                  loading="lazy"
                   style="width: 100%; height: 450px; background-color: transparent;"
                 >
                   <!-- Loading placeholder -->
@@ -769,7 +780,7 @@
               <!-- 3D Model Column -->
               <div class="showcase3d-banner scale-in">
                 <model-viewer
-                  src="./assets/models/mandible.glb"
+                  data-src="./assets/models/mandible.glb"
                   alt="Modèle 3D de la Mandibule"
                   auto-rotate
                   camera-controls
@@ -778,7 +789,7 @@
                   shadow-intensity="1"
                   auto-rotate-delay="0"
                   rotation-per-second="12deg"
-                  loading="eager"
+                  loading="lazy"
                   style="width: 100%; height: 450px; background-color: transparent;"
                 >
                   <!-- Loading placeholder -->
@@ -1097,6 +1108,58 @@
         </ul>
       </div>
     </footer>
+
+    <!-- Lazy-load 3D models via IntersectionObserver + background prefetch -->
+    <script>
+      (function() {
+        var modelSections = document.querySelectorAll('.showcase3d');
+        if (!modelSections.length) return;
+
+        // Step 1: IntersectionObserver — activate models when section is near viewport
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              loadModelViewerLib();
+              var viewers = entry.target.querySelectorAll('model-viewer[data-src]');
+              viewers.forEach(function(mv) {
+                var src = mv.getAttribute('data-src');
+                if (src) {
+                  mv.setAttribute('src', src);
+                  mv.removeAttribute('data-src');
+                }
+              });
+              observer.unobserve(entry.target);
+            }
+          });
+        }, {
+          rootMargin: '300px 0px',
+          threshold: 0
+        });
+
+        modelSections.forEach(function(section) {
+          observer.observe(section);
+        });
+
+        // Step 2: Background prefetch — silently cache GLB files after page is idle
+        // This way, even on slow connections, models are ready before the user scrolls
+        window.addEventListener('load', function() {
+          setTimeout(function() {
+            // Also preload the model-viewer library itself
+            loadModelViewerLib();
+
+            // Collect all GLB paths that haven't been activated yet
+            var allViewers = document.querySelectorAll('model-viewer[data-src]');
+            allViewers.forEach(function(mv) {
+              var url = mv.getAttribute('data-src');
+              if (url) {
+                // Use low-priority fetch to cache the file without blocking anything
+                fetch(url, { priority: 'low' }).catch(function() {});
+              }
+            });
+          }, 2000); // Wait 2s after full page load to avoid competing with critical resources
+        });
+      })();
+    </script>
 
     <!-- Custom JS -->
     <script src="./assets/js/script.js" type="module" defer></script>
