@@ -755,6 +755,8 @@
               const currentSrc = viewer.getAttribute('src');
               if (currentSrc.includes('imac.glb')) {
                 applyScreenTexture();
+                // Prefetch the dentition model so it's ready when the user clicks the button
+                fetch('./assets/models/permanent_dentition.glb').catch(function() {});
               }
               // Smooth transition in
               viewer.style.opacity = '1';
