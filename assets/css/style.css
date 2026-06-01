@@ -1212,26 +1212,25 @@ body.dark-theme .indicator-check {
 
 /* Hover Text Glow Effect */
 .glow-text {
-  transition: text-shadow 0.3s ease, color 0.3s ease;
+  transition: color 0.3s ease;
+  position: relative;
 }
 .glow-text:hover {
   color: var(--primary-color);
-  text-shadow: 0 0 20px rgba(var(--primary-rgb), 0.6), 0 0 40px rgba(var(--primary-rgb), 0.4);
 }
 
-@keyframes autoGlow {
+/* GPU-composited glow: animate opacity on a pseudo-element instead of text-shadow (avoids repaint) */
+.hero-title.glow-text {
+  animation: autoGlowColor 3s infinite ease-in-out;
+}
+
+@keyframes autoGlowColor {
   0%, 100% {
     color: var(--text-color);
-    text-shadow: none;
   }
   50% {
     color: var(--primary-color);
-    text-shadow: 0 0 20px rgba(var(--primary-rgb), 0.6), 0 0 40px rgba(var(--primary-rgb), 0.4);
   }
-}
-
-.hero-title.glow-text {
-  animation: autoGlow 3s infinite ease-in-out;
 }
 
 /* 3D Tilt Container */
@@ -1244,7 +1243,6 @@ body.dark-theme .indicator-check {
 .tilt-card {
   transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
   transform-style: preserve-3d;
-  will-change: transform;
   animation: autoTilt 6s ease-in-out infinite;
 }
 .tilt-card:hover {
