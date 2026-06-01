@@ -14,9 +14,10 @@
     <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="./assets/css/style.css" />
     
-    <!-- Google font link -->
+    <!-- Google font (non-blocking) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'" />
     
     <!-- Google Model Viewer for 3D elements (deferred) -->
     <script>
@@ -142,6 +143,8 @@
                 alt="Dr. Allami Othmane"
                 width="500"
                 height="550"
+                fetchpriority="high"
+                decoding="async"
               />
             </figure>
           </div>
@@ -156,7 +159,7 @@
               <li class="fade-in">
                 <a href="./implants-dentaires-echec-age-os" class="blog-card">
                   <figure class="card-banner">
-                    <video src="./assets/images/dr-elallami-post.mp4" loop muted playsinline preload="auto"></video>
+                    <video src="./assets/images/dr-elallami-post.mp4" loop muted playsinline preload="none"></video>
                     <div class="card-badge">
                       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
                       <time datetime="2026-05-24">Vidéo</time>
@@ -174,7 +177,7 @@
               <li class="fade-in">
                 <a href="./dents-de-sagesse-bombe-retardement" class="blog-card">
                   <figure class="card-banner">
-                    <video src="./assets/images/dent-de-sagesse.mp4" loop muted playsinline preload="auto"></video>
+                    <video src="./assets/images/dent-de-sagesse.mp4" loop muted playsinline preload="none"></video>
                     <div class="card-badge">
                       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
                       <time datetime="2026-05-24">Vidéo</time>
@@ -192,7 +195,7 @@
               <li class="fade-in">
                 <a href="./comment-maintenir-une-hygiene-bucco-dentaire-impeccable-au-quotidien" class="blog-card">
                   <figure class="card-banner">
-                    <img src="./assets/images/blog-1.jpg" alt="blog image" />
+                    <img src="./assets/images/blog-1.jpg" alt="blog image" loading="lazy" />
                     <div class="card-badge">
                       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                       <time datetime="2026-05-24">24 Mai 2026</time>
@@ -210,7 +213,7 @@
               <li class="fade-in">
                 <a href="./les-facettes-dentaires-le-secret-dun-sourire-hollywoodien-sur-mesure" class="blog-card">
                   <figure class="card-banner">
-                    <img src="./assets/images/blog-2.jpg" alt="blog image" />
+                    <img src="./assets/images/blog-2.jpg" alt="blog image" loading="lazy" />
                     <div class="card-badge">
                       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                       <time datetime="2026-05-24">24 Mai 2026</time>
@@ -228,7 +231,7 @@
               <li class="fade-in">
                 <a href="./pourquoi-lalignement-dentaire-est-important-meme-a-lage-adulte" class="blog-card">
                   <figure class="card-banner">
-                    <img src="./assets/images/blog-3.jpg" alt="blog image" />
+                    <img src="./assets/images/blog-3.jpg" alt="blog image" loading="lazy" />
                     <div class="card-badge">
                       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                       <time datetime="2026-05-24">24 Mai 2026</time>
@@ -369,6 +372,7 @@
                 width="470"
                 height="538"
                 alt="Notre Cabinet"
+                loading="lazy"
               />
             </figure>
 
@@ -860,11 +864,11 @@
               <!-- Slider Card -->
               <div class="image-comparison-slider scale-in" style="margin-inline: auto;">
                 <!-- Right Image (Après) -->
-                <img src="./assets/images/apres2.png" alt="Après traitement" class="image-after" draggable="false" />
+                <img src="./assets/images/apres2.png" alt="Après traitement" class="image-after" draggable="false" loading="lazy" />
                 
                 <!-- Left Image (Avant) wrapper -->
                 <div class="image-before-wrapper">
-                  <img src="./assets/images/avant2.png" alt="Avant traitement" class="image-before" draggable="false" />
+                  <img src="./assets/images/avant2.png" alt="Avant traitement" class="image-before" draggable="false" loading="lazy" />
                 </div>
                 
                 <!-- Divider -->
@@ -1083,6 +1087,7 @@
                 alt="Prendre Rendez-vous"
                 width="528"
                 height="538"
+                loading="lazy"
               />
             </figure>
 

@@ -411,15 +411,12 @@ if (customSelect && selectTrigger && triggerText && selectMenu && panelLangs && 
 // --- Blog Video Intersection Observer ---
 const blogVideos = document.querySelectorAll(".blog-card video");
 if (blogVideos.length > 0) {
-  // Pre-warm the videos and force rendering the first frame immediately on page load
-  blogVideos.forEach(video => {
-    video.preload = "auto";
-    video.load();
-  });
-
   const videoObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
+        // Start loading and playing only when visible
+        entry.target.preload = "auto";
+        entry.target.load();
         entry.target.play().catch(err => {
           console.log("Autoplay blocked or interrupted: ", err);
         });
@@ -428,7 +425,8 @@ if (blogVideos.length > 0) {
       }
     });
   }, {
-    threshold: 0.1
+    threshold: 0.1,
+    rootMargin: '200px 0px'
   });
 
   blogVideos.forEach(video => {
@@ -576,4 +574,22 @@ if (desktopReviewsSlider) {
   };
 
   desktopReviewsSlider.addEventListener("scroll", updateActiveDot);
+}
+
+// --- Lazy-load Service Card Background Images ---
+// These are ~13MB of CSS backgrounds that should only load when the section is near the viewport
+const serviceSection = document.querySelector(".service");
+if (serviceSection) {
+  const serviceImageObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("service-images-loaded");
+        serviceImageObserver.unobserve(entry.target);
+      }
+    });
+  }, {
+    rootMargin: '400px 0px',
+    threshold: 0
+  });
+  serviceImageObserver.observe(serviceSection);
 }

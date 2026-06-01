@@ -2,7 +2,7 @@
   #mobile.css - Isolated Mobile-first stylesheet for Dentelo
 \*-----------------------------------*/
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+/* Font loaded via system stack; Jakarta Sans used when available */
 
 :root {
   /* Color Tokens - Light Theme by Default */
@@ -534,14 +534,14 @@ body {
   transition: opacity 0.45s ease, transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
   backface-visibility: hidden;
 }
-.service-image-oral { --service-image: url("../images/services/service-oral.png"); }
-.service-image-orthodontics { --service-image: url("../images/services/orthodontiques.webp"); }
-.service-image-smile { --service-image: url("../images/services/service-smile.png"); }
-.service-image-filler { --service-image: url("../images/services/service-filler.png"); }
-.service-image-laser { --service-image: url("../images/services/Laser2.webp"); }
-.service-image-digital { --service-image: url("../images/services/service-digital.png"); }
-.service-image-endo { --service-image: url("../images/services/service-endo.png"); }
-.service-image-perio { --service-image: url("../images/services/service-perio.png"); }
+.service-images-loaded .service-image-oral { --service-image: url("../images/services/service-oral.png"); }
+.service-images-loaded .service-image-orthodontics { --service-image: url("../images/services/orthodontiques.webp"); }
+.service-images-loaded .service-image-smile { --service-image: url("../images/services/service-smile.png"); }
+.service-images-loaded .service-image-filler { --service-image: url("../images/services/service-filler.png"); }
+.service-images-loaded .service-image-laser { --service-image: url("../images/services/Laser2.webp"); }
+.service-images-loaded .service-image-digital { --service-image: url("../images/services/service-digital.png"); }
+.service-images-loaded .service-image-endo { --service-image: url("../images/services/service-endo.png"); }
+.service-images-loaded .service-image-perio { --service-image: url("../images/services/service-perio.png"); }
 .service-card > * {
   position: relative;
   z-index: 2;
